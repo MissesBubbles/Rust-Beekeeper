@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Oxide.Core;
 using UnityEngine;
@@ -19,6 +18,69 @@ namespace Oxide.Plugins
             public bool DebugMode = false;
 
             public string NpcName = "Beekeeper";
+
+            public List<string> Greetings = new List<string>
+            {
+                "The bees have been busy today.",
+                "Welcome, friend. Mind the hives.",
+                "The queen watches over every colony."
+            };
+
+            public List<string> Farewells = new List<string>
+            {
+                "May your hives flourish.",
+                "Travel safely.",
+                "Mind the stingers."
+            };
+
+            public List<string> PurchaseMessages = new List<string>
+            {
+                "Spend wisely.",
+                "Good choice.",
+                "Every beekeeper starts somewhere."
+            };
+
+            public List<string> NoScrapMessages = new List<string>
+            {
+                "You'll need more scrap.",
+                "Quality costs scrap.",
+                "My bees don't work for free."
+            };
+
+            public List<string> HoneySoldMessages = new List<string>
+            {
+                "Excellent harvest.",
+                "Sweet work.",
+                "Your bees are treating you well."
+            };
+
+            public List<string> NoHoneyMessages = new List<string>
+            {
+                "You have no honey to sell.",
+                "Come back after a harvest.",
+                "No jars... no trade."
+            };
+
+            public List<string> RareItemMessages = new List<string>
+            {
+                "Handle that nucleus carefully.",
+                "Now THAT is a rare find.",
+                "The queen smiles upon you."
+            };
+
+            public List<string> ApiaryTips = new List<string>
+            {
+                "Healthy bees make healthy hives.",
+                "Wildflowers help every colony.",
+                "Neglected hives won't survive forever."
+            };
+
+            public List<string> IdleMessages = new List<string>
+            {
+                "The bees never truly sleep...",
+                "Buzz... buzz...",
+                "A quiet hive is rarely a healthy hive."
+            };
 
             public bool EnableHoneySelling = true;
             public int HoneyJarsRequiredToSell = 500;
@@ -119,7 +181,13 @@ namespace Oxide.Plugins
         [ChatCommand("beekeeper")]
         private void BeekeeperCommand(BasePlayer player, string command, string[] args)
         {
-            if (args == null || args.Length == 0 || args[0].ToLower() == "help")
+            if (!permission.UserHasPermission(player.UserIDString, PermissionAdmin))
+            {
+                player.ChatMessage("<color=#ff5555>You do not have permission to use Beekeeper admin commands.</color>");
+                return;
+            }
+
+            if (args == null || args.Length == 0)
             {
                 SendHelp(player);
                 return;
@@ -129,36 +197,72 @@ namespace Oxide.Plugins
 
             switch (subCommand)
             {
+                case "help":
+                    SendHelp(player);
+                    break;
+
                 case "spawn":
-                    player.ChatMessage("Beekeeper spawn command coming next.");
+                    SpawnBeekeeper(player);
                     break;
 
                 case "remove":
-                    player.ChatMessage("Beekeeper remove command coming later.");
+                    RemoveBeekeeper(player);
                     break;
 
                 case "move":
-                    player.ChatMessage("Beekeeper move command coming later.");
+                    MoveBeekeeper(player);
                     break;
 
                 case "reload":
-                    player.ChatMessage("Beekeeper reload command coming later.");
+                    ReloadPlugin(player);
                     break;
 
                 default:
-                    player.ChatMessage("Unknown beekeeper command. Use /beekeeper help");
+                    player.ChatMessage("<color=#ff5555>Unknown beekeeper command. Use /beekeeper help</color>");
                     break;
             }
         }
 
         private void SendHelp(BasePlayer player)
         {
-            player.ChatMessage("<color=#ffd479>Beekeeper Commands</color>");
-            player.ChatMessage("/beekeeper help");
-            player.ChatMessage("/beekeeper spawn");
-            player.ChatMessage("/beekeeper remove");
-            player.ChatMessage("/beekeeper move");
-            player.ChatMessage("/beekeeper reload");
+            player.ChatMessage("<color=#FFD700>══════════════════════════════════════</color>");
+            player.ChatMessage("<size=18><color=#FFD700>🐝 Beekeeper v0.2.0</color></size>");
+            player.ChatMessage("<color=#C0C0C0>Created by MissesBubbles</color>");
+            player.ChatMessage(" ");
+            player.ChatMessage("<color=#55FF55>Admin Commands</color>");
+            player.ChatMessage("<color=#FFD700>/beekeeper help</color> <color=#FFFFFF>- Shows this menu</color>");
+            player.ChatMessage("<color=#FFD700>/beekeeper spawn</color> <color=#FFFFFF>- Spawn the Beekeeper NPC</color>");
+            player.ChatMessage("<color=#FFD700>/beekeeper move</color> <color=#FFFFFF>- Move the existing NPC</color>");
+            player.ChatMessage("<color=#FFD700>/beekeeper remove</color> <color=#FFFFFF>- Remove the NPC</color>");
+            player.ChatMessage("<color=#FFD700>/beekeeper reload</color> <color=#FFFFFF>- Reload config and data</color>");
+            player.ChatMessage("<color=#FFD700>══════════════════════════════════════</color>");
+        }
+
+        #endregion
+
+        #region Beekeeper Management
+
+        private void SpawnBeekeeper(BasePlayer player)
+        {
+            player.ChatMessage("<color=#55ff55>Spawning the Beekeeper... (Coming Soon)</color>");
+        }
+
+        private void RemoveBeekeeper(BasePlayer player)
+        {
+            player.ChatMessage("<color=#ffaa00>Removing the Beekeeper... (Coming Soon)</color>");
+        }
+
+        private void MoveBeekeeper(BasePlayer player)
+        {
+            player.ChatMessage("<color=#55aaff>Moving the Beekeeper... (Coming Soon)</color>");
+        }
+
+        private void ReloadPlugin(BasePlayer player)
+        {
+            LoadConfigData();
+            LoadData();
+
+            player.ChatMessage("<color=#55ff55>Beekeeper configuration and data reloaded.</color>");
         }
 
         #endregion
