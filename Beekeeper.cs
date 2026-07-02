@@ -231,7 +231,7 @@ namespace Oxide.Plugins
             player.ChatMessage(" ");
             player.ChatMessage("<color=#55FF55>Admin Commands</color>");
             player.ChatMessage("<color=#FFD700>/beekeeper help</color> <color=#FFFFFF>- Shows this menu</color>");
-            player.ChatMessage("<color=#FFD700>/beekeeper spawn</color> <color=#FFFFFF>- Spawn the Beekeeper NPC</color>");
+            player.ChatMessage("<color=#FFD700>/beekeeper spawn</color> <color=#FFFFFF>- Save the Beekeeper NPC location</color>");
             player.ChatMessage("<color=#FFD700>/beekeeper move</color> <color=#FFFFFF>- Move the existing NPC</color>");
             player.ChatMessage("<color=#FFD700>/beekeeper remove</color> <color=#FFFFFF>- Remove the NPC</color>");
             player.ChatMessage("<color=#FFD700>/beekeeper reload</color> <color=#FFFFFF>- Reload config and data</color>");
@@ -244,7 +244,20 @@ namespace Oxide.Plugins
 
         private void SpawnBeekeeper(BasePlayer player)
         {
-            player.ChatMessage("<color=#55ff55>Spawning the Beekeeper... (Coming Soon)</color>");
+            if (storedData.HasBeekeeper)
+            {
+                player.ChatMessage("<color=#ffaa00>A Beekeeper already exists. Use /beekeeper move to relocate him.</color>");
+                return;
+            }
+
+            storedData.HasBeekeeper = true;
+            storedData.Position = new Vector3Data(player.transform.position);
+            storedData.Rotation = new Vector3Data(player.transform.rotation.eulerAngles);
+
+            SaveData();
+
+            player.ChatMessage("<color=#55ff55>Beekeeper location saved.</color>");
+            player.ChatMessage("<color=#ffd479>The NPC will spawn here once NPC spawning is implemented.</color>");
         }
 
         private void RemoveBeekeeper(BasePlayer player)
@@ -254,7 +267,18 @@ namespace Oxide.Plugins
 
         private void MoveBeekeeper(BasePlayer player)
         {
-            player.ChatMessage("<color=#55aaff>Moving the Beekeeper... (Coming Soon)</color>");
+            if (!storedData.HasBeekeeper)
+            {
+                player.ChatMessage("<color=#ffaa00>No Beekeeper exists yet. Use /beekeeper spawn first.</color>");
+                return;
+            }
+
+            storedData.Position = new Vector3Data(player.transform.position);
+            storedData.Rotation = new Vector3Data(player.transform.rotation.eulerAngles);
+
+            SaveData();
+
+            player.ChatMessage("<color=#55ff55>Beekeeper location moved and saved.</color>");
         }
 
         private void ReloadPlugin(BasePlayer player)
