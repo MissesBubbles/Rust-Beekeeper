@@ -232,8 +232,8 @@ namespace Oxide.Plugins
             player.ChatMessage("<color=#55FF55>Admin Commands</color>");
             player.ChatMessage("<color=#FFD700>/beekeeper help</color> <color=#FFFFFF>- Shows this menu</color>");
             player.ChatMessage("<color=#FFD700>/beekeeper spawn</color> <color=#FFFFFF>- Save the Beekeeper NPC location</color>");
-            player.ChatMessage("<color=#FFD700>/beekeeper move</color> <color=#FFFFFF>- Move the existing NPC</color>");
-            player.ChatMessage("<color=#FFD700>/beekeeper remove</color> <color=#FFFFFF>- Remove the NPC</color>");
+            player.ChatMessage("<color=#FFD700>/beekeeper move</color> <color=#FFFFFF>- Move the existing NPC location</color>");
+            player.ChatMessage("<color=#FFD700>/beekeeper remove</color> <color=#FFFFFF>- Remove the NPC location</color>");
             player.ChatMessage("<color=#FFD700>/beekeeper reload</color> <color=#FFFFFF>- Reload config and data</color>");
             player.ChatMessage("<color=#FFD700>══════════════════════════════════════</color>");
         }
@@ -262,7 +262,17 @@ namespace Oxide.Plugins
 
         private void RemoveBeekeeper(BasePlayer player)
         {
-            player.ChatMessage("<color=#ffaa00>Removing the Beekeeper... (Coming Soon)</color>");
+            if (!storedData.HasBeekeeper)
+            {
+                player.ChatMessage("<color=#ffaa00>No Beekeeper has been placed.</color>");
+                return;
+            }
+
+            storedData = new StoredData();
+
+            SaveData();
+
+            player.ChatMessage("<color=#ff5555>Beekeeper location removed.</color>");
         }
 
         private void MoveBeekeeper(BasePlayer player)
