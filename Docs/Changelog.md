@@ -1,104 +1,79 @@
-# Beekeeper Configuration
+# Beekeeper Changelog
 
-## General
-
-- Plugin Enabled
-- Debug Mode
-- Language
+All notable changes to the Beekeeper plugin will be documented here.
 
 ---
 
-## NPC
+# Version 0.1.0 - Project Foundation
 
-- NPC Name
-- NPC Health
-- NPC Invincible
-- NPC Can Be Killed
-- NPC Outfit
-- NPC Greeting
-- NPC Farewell
-
----
-
-## Shop
-
-- Enable Shop
-- Enable Buying
-- Enable Selling
-- Currency Item
-- Currency Amount
+## Added
+- Created GitHub repository
+- Created plugin structure
+- Created README
+- Created documentation
+- Created roadmap
+- Created game design document
+- Created configuration guide
+- Created ideas document
 
 ---
 
-## Honey Selling
+# Version 0.2.0 - Plugin Framework
 
-- Enabled
-- Required Honey Jars
-- Reward Item
-- Reward Amount
-- Daily Sell Limit
-- Reset Time
+## Added
+- Plugin information
+- Configuration system
+- Data system
+- Permission system
+- Command framework
+- `/beekeeper` command
+- `/beekeeper help`
+- Plugin regions for organization
 
----
-
-## Bee Items
-
-### Wax Bandage
-
-- Enabled
-- Craftable
-- Heal Amount
-- Use Time
-
-### Honey Ration
-
-- Enabled
-- Food
-- Water
-- Health
-- Cooldown
-
-### Pollen Pouch
-
-- Enabled
-- Stack Size
-- Uses
-
-### Bee Nucleus
-
-- Enabled
-- Drop Chance
-- Quality Chances
-
-### Beekeeper Gloves
-
-- Enabled
-- Bonus Nucleus Chance
-- Protect From Stings
-
-### Apiary Starter Kit
-
-- Enabled
-- Price
-- Included Items
+## Planned
+- `/beekeeper spawn`
+- `/beekeeper remove`
+- `/beekeeper move`
+- NPC spawning system
 
 ---
 
-## Hive System
+# Upcoming
 
-- Enabled
-- Hive Health
-- Hive Hunger
-- Hive Cleanliness
-- Hive Decay
-- Hive Death
-- Production Speed
-- Max Honey
-- Max Honeycomb
+## Version 0.3.0
+- Spawn beekeeper NPC
+- Save NPC location
+- Load NPC on server startup
+- Remove NPC
+- Move NPC
 
----
+## Version 0.4.0
+- Shop system
+- Honey selling
+- Configurable prices
+- Configurable limits
 
-## Permissions
+## Version 0.5.0
+- Honey Ration
+- Bee Jelly
+- Pollen Pouch
+- Wildflower Seeds
+- Bee Nucleus
+- Beekeeper Gloves
+- Bee Box
+- Apiary Starter Kit
 
-- beekeeper.admin
-- beekeeper.use
+## Version 0.6.0
+- Hive health
+- Hive cleanliness
+- Hive hunger
+- Hive production
+- Hive sickness
+- Hive death
+
+## Version 0.7.0
+- Loot table integration
+- Locked Crates
+- Elite Crates
+- Military Crates
+- Configurable loot chances
