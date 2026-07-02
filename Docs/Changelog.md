@@ -26,15 +26,20 @@ All notable changes to the Beekeeper plugin will be documented here.
 - Data system
 - Permission system
 - Command framework
-- `/beekeeper` command
+- `/beekeeper` admin command
 - `/beekeeper help`
+- `/beekeeper spawn` saves NPC location
+- `/beekeeper move` updates saved NPC location
+- `/beekeeper remove` removes saved NPC location
+- `/beekeeper reload` reloads configuration and data
+- Help menu
 - Plugin regions for organization
+- Initial dialogue configuration
+- Initial beekeeper data management
 
-## Planned
-- `/beekeeper spawn`
-- `/beekeeper remove`
-- `/beekeeper move`
+## In Progress
 - NPC spawning system
+- NPC persistence after server restart
 
 ---
 
