@@ -333,10 +333,31 @@ namespace Oxide.Plugins
         private void SpawnNPC(Vector3 position, Vector3 rotation)
         {
             Puts("SpawnNPC() called.");
-            Puts($"Position: {position.x}, {position.y}, {position.z}");
-            Puts($"Rotation: {rotation.x}, {rotation.y}, {rotation.z}");
 
-            // Real NPC spawning will be added here next.
+            if (beekeeperNpc != null && !beekeeperNpc.IsDestroyed)
+            {
+                beekeeperNpc.Kill();
+                beekeeperNpc = null;
+            }
+
+            beekeeperNpc = GameManager.server.CreateEntity(
+                config.NPC.PrefabPath,
+                position,
+                Quaternion.Euler(rotation)
+            ) as BasePlayer;
+
+            if (beekeeperNpc == null)
+            {
+                PrintError("Failed to create Beekeeper NPC.");
+                return;
+            }
+
+            beekeeperNpc.displayName = config.NPC.Name;
+            beekeeperNpc.health = config.NPC.Health;
+
+            beekeeperNpc.Spawn();
+
+            Puts("Beekeeper NPC spawned successfully.");
         }
 
         #endregion
@@ -348,6 +369,11 @@ namespace Oxide.Plugins
             LoadConfigData();
             LoadData();
             RegisterPermissions();
+
+            if (storedData.HasBeekeeper)
+            {
+                SpawnNPC(storedData.Position.ToVector3(), storedData.Rotation.ToVector3());
+            }
 
             Puts("Beekeeper v0.2.0 loaded.");
         }
