@@ -31,6 +31,8 @@ namespace Oxide.Plugins
             public string Name = "Beekeeper";
             public float Health = 100f;
             public bool Invincible = true;
+
+            public string PrefabPath = "assets/rust.ai/agents/npcplayer/humannpc/scientist/scientistnpc_full_any.prefab";
         }
 
         private class DialogueSettings
