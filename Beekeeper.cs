@@ -292,12 +292,17 @@ namespace Oxide.Plugins
                 return;
             }
 
+            if (beekeeperNpc != null && !beekeeperNpc.IsDestroyed)
+            {
+                beekeeperNpc.Kill();
+                beekeeperNpc = null;
+            }
+
             storedData = new StoredData();
-            beekeeperNpc = null;
 
             SaveData();
 
-            player.ChatMessage("<color=#ff5555>Beekeeper location removed.</color>");
+            player.ChatMessage("<color=#55ff55>Beekeeper removed successfully.</color>");
         }
 
         private void MoveBeekeeper(BasePlayer player)
@@ -308,6 +313,12 @@ namespace Oxide.Plugins
                 return;
             }
 
+            if (beekeeperNpc != null && !beekeeperNpc.IsDestroyed)
+            {
+                beekeeperNpc.Kill();
+                beekeeperNpc = null;
+            }
+
             storedData.Position = new Vector3Data(player.transform.position);
             storedData.Rotation = new Vector3Data(player.transform.rotation.eulerAngles);
 
@@ -315,7 +326,7 @@ namespace Oxide.Plugins
 
             SpawnNPC(storedData.Position.ToVector3(), storedData.Rotation.ToVector3());
 
-            player.ChatMessage("<color=#55ff55>Beekeeper location moved and saved.</color>");
+            player.ChatMessage("<color=#55ff55>Beekeeper moved successfully.</color>");
         }
 
         private void ReloadPlugin(BasePlayer player)
