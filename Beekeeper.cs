@@ -379,7 +379,28 @@ namespace Oxide.Plugins
 
             beekeeperNpc.Spawn();
 
-            Puts("Beekeeper NPC spawned successfully.");
+            Puts($"Spawned '{config.NPC.Name}'");
+            Puts($"Position: {position}");
+            Puts($"Rotation: {rotation}");
+        }
+
+        #endregion
+
+        #region Dialogue
+
+        private string GetRandomGreeting()
+        {
+            if (config.Dialogue.Greetings == null || config.Dialogue.Greetings.Count == 0)
+                return "Hello.";
+
+            int index = UnityEngine.Random.Range(0, config.Dialogue.Greetings.Count);
+
+            return config.Dialogue.Greetings[index];
+        }
+
+        private void GreetPlayer(BasePlayer player)
+        {
+            player.ChatMessage($"<color=#FFD700>{config.NPC.Name}</color>: {GetRandomGreeting()}");
         }
 
         #endregion
