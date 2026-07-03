@@ -334,7 +334,18 @@ namespace Oxide.Plugins
             LoadConfigData();
             LoadData();
 
-            player.ChatMessage("<color=#55ff55>Beekeeper configuration and data reloaded.</color>");
+            if (beekeeperNpc != null && !beekeeperNpc.IsDestroyed)
+            {
+                beekeeperNpc.Kill();
+                beekeeperNpc = null;
+            }
+
+            if (storedData.HasBeekeeper)
+            {
+                SpawnNPC(storedData.Position.ToVector3(), storedData.Rotation.ToVector3());
+            }
+
+            player.ChatMessage("<color=#55ff55>Beekeeper configuration, data, and NPC reloaded.</color>");
         }
 
         #endregion
