@@ -331,6 +331,8 @@ namespace Oxide.Plugins
         private void SpawnNPC(Vector3 position, Vector3 rotation)
         {
             Puts("SpawnNPC() called.");
+            Puts($"Position: {position.x}, {position.y}, {position.z}");
+            Puts($"Rotation: {rotation.x}, {rotation.y}, {rotation.z}");
 
             // Real NPC spawning will be added here next.
         }
