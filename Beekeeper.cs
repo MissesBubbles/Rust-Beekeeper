@@ -36,67 +36,67 @@ namespace Oxide.Plugins
         private class DialogueSettings
         {
             public List<string> Greetings = new List<string>
-    {
-        "The bees have been busy today.",
-        "Welcome, friend. Mind the hives.",
-        "The queen watches over every colony."
-    };
+            {
+                "The bees have been busy today.",
+                "Welcome, friend. Mind the hives.",
+                "The queen watches over every colony."
+            };
 
             public List<string> Farewells = new List<string>
-    {
-        "May your hives flourish.",
-        "Travel safely.",
-        "Mind the stingers."
-    };
+            {
+                "May your hives flourish.",
+                "Travel safely.",
+                "Mind the stingers."
+            };
 
             public List<string> PurchaseMessages = new List<string>
-    {
-        "Spend wisely.",
-        "Good choice.",
-        "Every beekeeper starts somewhere."
-    };
+            {
+                "Spend wisely.",
+                "Good choice.",
+                "Every beekeeper starts somewhere."
+            };
 
             public List<string> NoScrapMessages = new List<string>
-    {
-        "You'll need more scrap.",
-        "Quality costs scrap.",
-        "My bees don't work for free."
-    };
+            {
+                "You'll need more scrap.",
+                "Quality costs scrap.",
+                "My bees don't work for free."
+            };
 
             public List<string> HoneySoldMessages = new List<string>
-    {
-        "Excellent harvest.",
-        "Sweet work.",
-        "Your bees are treating you well."
-    };
+            {
+                "Excellent harvest.",
+                "Sweet work.",
+                "Your bees are treating you well."
+            };
 
             public List<string> NoHoneyMessages = new List<string>
-    {
-        "You have no honey to sell.",
-        "Come back after a harvest.",
-        "No jars... no trade."
-    };
+            {
+                "You have no honey to sell.",
+                "Come back after a harvest.",
+                "No jars... no trade."
+            };
 
             public List<string> RareItemMessages = new List<string>
-    {
-        "Handle that nucleus carefully.",
-        "Now THAT is a rare find.",
-        "The queen smiles upon you."
-    };
+            {
+                "Handle that nucleus carefully.",
+                "Now THAT is a rare find.",
+                "The queen smiles upon you."
+            };
 
             public List<string> ApiaryTips = new List<string>
-    {
-        "Healthy bees make healthy hives.",
-        "Wildflowers help every colony.",
-        "Neglected hives won't survive forever."
-    };
+            {
+                "Healthy bees make healthy hives.",
+                "Wildflowers help every colony.",
+                "Neglected hives won't survive forever."
+            };
 
             public List<string> IdleMessages = new List<string>
-    {
-        "The bees never truly sleep...",
-        "Buzz... buzz...",
-        "A quiet hive is rarely a healthy hive."
-    };
+            {
+                "The bees never truly sleep...",
+                "Buzz... buzz...",
+                "A quiet hive is rarely a healthy hive."
+            };
         }
 
         private class HoneySellingSettings
@@ -135,6 +135,7 @@ namespace Oxide.Plugins
         #region Data
 
         private StoredData storedData;
+        private BasePlayer beekeeperNpc;
 
         private class StoredData
         {
@@ -275,8 +276,10 @@ namespace Oxide.Plugins
 
             SaveData();
 
+            SpawnNPC(storedData.Position.ToVector3(), storedData.Rotation.ToVector3());
+
             player.ChatMessage("<color=#55ff55>Beekeeper location saved.</color>");
-            player.ChatMessage("<color=#ffd479>The NPC will spawn here once NPC spawning is implemented.</color>");
+            player.ChatMessage("<color=#ffd479>NPC spawn method has been called.</color>");
         }
 
         private void RemoveBeekeeper(BasePlayer player)
@@ -288,6 +291,7 @@ namespace Oxide.Plugins
             }
 
             storedData = new StoredData();
+            beekeeperNpc = null;
 
             SaveData();
 
@@ -307,6 +311,8 @@ namespace Oxide.Plugins
 
             SaveData();
 
+            SpawnNPC(storedData.Position.ToVector3(), storedData.Rotation.ToVector3());
+
             player.ChatMessage("<color=#55ff55>Beekeeper location moved and saved.</color>");
         }
 
@@ -316,6 +322,17 @@ namespace Oxide.Plugins
             LoadData();
 
             player.ChatMessage("<color=#55ff55>Beekeeper configuration and data reloaded.</color>");
+        }
+
+        #endregion
+
+        #region NPC
+
+        private void SpawnNPC(Vector3 position, Vector3 rotation)
+        {
+            Puts("SpawnNPC() called.");
+
+            // Real NPC spawning will be added here next.
         }
 
         #endregion
